@@ -25,3 +25,27 @@ function hideOutputView() {
 }
 
 startOver.addEventListener("click", hideOutputView);
+
+async function translateText(userPrompt) {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            "x-api-key": API_KEY,
+            "anthropic-version": "2023-06-01",
+            "anthropic-dangerous-direct-browser-access": "true"
+        },
+        body: JSON.stringify({
+            model: "claude-haiku-5-5",
+            max_tokens: 1024,
+            system: "You are a translation bot, you will detect the language typed and always translate it to English. You will reply ONLY with a JSON object with two keys detectedLanguage and translation with no extra words and no markdown code fences around it",
+            messages: [
+                { role: "user", content: userPrompt }
+            ]
+        }),
+    })
+    const data = await res.json();
+    console.log(data.content[0].text)
+}
+
+translateText("Bonjour").then(result => console.log(result))
