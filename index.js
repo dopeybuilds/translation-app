@@ -4,16 +4,18 @@ const translateBtn = document.getElementById("translate-btn");
 const startOver = document.getElementById("start-over-btn");
 const textArea = document.getElementById("input");
 const originalText = document.getElementById("original-text");
+const detectedLang = document.getElementById("detected-language");
+const translatedLang = document.getElementById("translation-text");
 
-function showOutputView() {
+async function showOutputView() {
     if (!textArea.value.trim()) {
         return
-    } 
-    
+    }
+    const result = await translateText(textArea.value);
     inputView.style.display = "none";
     outputView.style.display = "block";
     originalText.textContent = textArea.value;
-    
+
 }
 
 translateBtn.addEventListener("click", showOutputView);
@@ -40,12 +42,10 @@ async function translateText(userPrompt) {
             max_tokens: 1024,
             system: "You are a translation bot, you will detect the language typed and always translate it to English. You will reply ONLY with a JSON object with two keys detectedLanguage and translation with no extra words and no markdown code fences around it",
             messages: [
-                { role: "user", content: userPrompt }
+                {role: "user", content: userPrompt}
             ]
         }),
     })
     const data = await res.json();
-    console.log(data.content[0].text)
 }
 
-translateText("Bonjour").then(result => console.log(result))
