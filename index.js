@@ -13,16 +13,21 @@ async function showOutputView() {
     }
     translateBtn.textContent = "Translating..."
     translateBtn.disabled = true;
-    const result = await translateText(textArea.value);
-    translateBtn.textContent = "Translate"
-    translateBtn.disabled = false;
-    console.log(result);
-    detectedLang.textContent = result.detectedLanguage;
-    translatedLang.textContent = result.translation;
-    originalText.textContent = textArea.value;
-    inputView.style.display = "none";
-    outputView.style.display = "block";
-
+    try {
+        const result = await translateText(textArea.value);
+        console.log(result);
+        detectedLang.textContent = result.detectedLanguage;
+        translatedLang.textContent = result.translation;
+        originalText.textContent = textArea.value;
+        inputView.style.display = "none";
+        outputView.style.display = "block";
+    } catch (error) {
+        console.error(error);
+        alert("Sorry, something went wrong. Please try again.")
+    } finally {
+        translateBtn.textContent = "Translate"
+        translateBtn.disabled = false;
+    }
 }
 
 translateBtn.addEventListener("click", showOutputView);
@@ -53,7 +58,12 @@ async function translateText(userPrompt) {
             ]
         }),
     })
-    const data = await res.json();
-    return JSON.parse(data.content[0].text)
+    console.log(res)
+    if (!res.ok) {
+        throw Error(res.message);
+    } else {
+        const data = await res.json();
+        return JSON.parse(data.content[0].text)
+    }
 }
 
