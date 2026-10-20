@@ -11,10 +11,17 @@ async function showOutputView() {
     if (!textArea.value.trim()) {
         return
     }
+    translateBtn.textContent = "Translating..."
+    translateBtn.disabled = true;
     const result = await translateText(textArea.value);
+    translateBtn.textContent = "Translate"
+    translateBtn.disabled = false;
+    console.log(result);
+    detectedLang.textContent = result.detectedLanguage;
+    translatedLang.textContent = result.translation;
+    originalText.textContent = textArea.value;
     inputView.style.display = "none";
     outputView.style.display = "block";
-    originalText.textContent = textArea.value;
 
 }
 
@@ -47,5 +54,6 @@ async function translateText(userPrompt) {
         }),
     })
     const data = await res.json();
+    return JSON.parse(data.content[0].text)
 }
 
