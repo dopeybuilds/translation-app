@@ -3,15 +3,92 @@
     margin: 0;
 }
 
-#input {
-    width: 100%;
-    max-width: 31.25rem;
+body {
+    font-family: system-ui, sans-serif;
+    background-color: #f4f5f7;
+    color: #1f2937;
 }
 
+header {
+    background-color: #111827;
+    color: white;
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+h1 {
+    font-size: 1.75rem;
+}
+
+h2 {
+    color: #2b4f8e;
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+main {
+    background-color: white;
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid #111827;
+    width: calc(100% - 2rem);
+}
+
+#input, #original-text, #translation-text {
+    border: none;
+    background-color: #e7e7e7;
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#original-text, #translation-text {
+    text-align: center;
+}
+
+#input {
+    width: 100%;
+    height: 140px;
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+button:hover {
+    background-color: #8f8e8e;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
 #robot {
-    width: 120px;
+    width: 70px;
 }
 
 @media (min-width: 600px) {
-
+    header {
+        padding: 3rem 1rem;
+    }
+    h1 {
+        font-size: 3rem;
+    }
+    #robot {
+        width: 120px;
+    }
 }

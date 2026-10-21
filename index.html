@@ -9,19 +9,21 @@
 <body>
 <header>
     <img src="./images/robot.png" alt="" id="robot">
-    <h1>Translate with me</h1>
-    <p>Quick translations every time</p>
+   <div>
+       <h1>Translate with me</h1>
+       <p>Quick translations every time</p>
+   </div>
 </header>
 <main>
     <section id="input-view">
         <h2>
-            <label for="input">Type in any language, we'll detect it!</label>
+            <label for="input">Type in any language, I'll detect it!</label>
         </h2>
-        <textarea id="input" rows="10"></textarea>
+        <textarea id="input"></textarea>
         <button id="translate-btn">Translate</button>
     </section>
     <section id="output-view" hidden>
-        <h2>Original text (<span id="detected-language"></span>) 👇</h2>
+        <h2>Original text (<span id="detected-language"></span>)</h2>
         <p id="original-text"></p>
         <h2>Your Translation</h2>
         <p id="translation-text"></p>
