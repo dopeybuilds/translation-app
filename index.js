@@ -30,6 +30,13 @@ async function showOutputView() {
     }
 }
 
+textArea.addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault()
+        showOutputView()
+    }
+})
+
 translateBtn.addEventListener("click", showOutputView);
 
 function hideOutputView() {
