@@ -10,12 +10,15 @@ const translatedLang = document.getElementById("translation-text");
 async function showOutputView() {
     if (!textArea.value.trim()) {
         return
+    } else {
+        if (translateBtn.style.display === "none") {
+            return
+        }
     }
     translateBtn.textContent = "Translating..."
     translateBtn.disabled = true;
     try {
         const result = await translateText(textArea.value);
-        console.log(result);
         detectedLang.textContent = result.detectedLanguage;
         translatedLang.textContent = result.translation;
         originalText.textContent = textArea.value;
@@ -65,9 +68,8 @@ async function translateText(userPrompt) {
             ]
         }),
     })
-    console.log(res)
     if (!res.ok) {
-        throw Error(res.message);
+        throw Error(res.status);
     } else {
         const data = await res.json();
         return JSON.parse(data.content[0].text)
